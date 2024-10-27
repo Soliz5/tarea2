@@ -1,0 +1,21 @@
+def calcular_diametros_programino():
+    
+    primer_diametro = 20  
+    ultimo_diametro = 60  
+    total_monedas = 6
+    
+    diferencia = (ultimo_diametro - primer_diametro) / (total_monedas - 1)
+    
+    diametros = [primer_diametro + i * diferencia for i in range(total_monedas)]
+    
+    diametros_redondeados = []
+    for d in diametros:
+        if d % 1 >= 0.5:
+            diametros_redondeados.append(int(d) + 1)
+        else:
+            diametros_redondeados.append(int(d))
+    
+    print("Constante de incremento:", diferencia)
+    print("Diámetros de las monedas:", diametros_redondeados)
+
+calcular_diametros_programino()
