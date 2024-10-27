@@ -1,0 +1,30 @@
+def calcular_diametros():
+    diametros = []
+    diametro_inicial = 20
+    max_diametro = 60
+    monedas_deseadas = 6
+    
+    diametro_actual = diametro_inicial
+    
+    while len(diametros) < monedas_deseadas:
+        if diametro_actual > max_diametro:
+            break  
+        
+        diametros.append(diametro_actual)
+        
+        nuevo_diametro = diametro_actual * 1.3
+        
+        if nuevo_diametro % 1 >= 0.5:
+            nuevo_diametro = int(nuevo_diametro) + 1
+        else:
+            nuevo_diametro = int(nuevo_diametro)
+        
+        diametro_actual = nuevo_diametro
+    
+    if len(diametros) == monedas_deseadas:
+        print("Diámetros de las monedas:", diametros)
+    else:
+        print("Número máximo de monedas posibles:", len(diametros))
+        print("Diámetros obtenidos:", diametros)
+
+calcular_diametros()
