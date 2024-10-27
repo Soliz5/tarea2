@@ -1,44 +1,48 @@
-import java.util.Scanner;
+def es_primo(n):
+    """Verifica si un número es primo."""
+    if n < 2:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
 
-public class MediaPositivosNegativos {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int[] numeros = new int[10];
-        int sumaPositivos = 0;
-        int sumaNegativos = 0;
-        int contadorPositivos = 0;
-        int contadorNegativos = 0;
+def calcular_puntos(ficha):
+    """Calcula los puntos de una ficha."""
+    puntos = 0
+    for numero in ficha:
+        if es_primo(numero):
+            puntos += 4
+        if numero % 2 == 0:
+            puntos += 1
+        if numero % 7 == 0:
+            puntos += 2
+    return puntos
 
-        System.out.println("Introduce 10 números enteros:");
-        for (int i = 0; i < 10; i++) {
-            System.out.print("Número " + (i + 1) + ": ");
-            numeros[i] = scanner.nextInt();
-        }
+def es_ficha_ganadora(puntos):
+    """Determina si la ficha es ganadora."""
+    return puntos > 70
 
-        for (int num : numeros) {
-            if (num > 0) {
-                sumaPositivos += num;
-                contadorPositivos++;
-            } else if (num < 0) {
-                sumaNegativos += num;
-                contadorNegativos++;
-            }
-        }
+def main():
+    ficha = []
+    
+    # Leer 20 números de la ficha
+    print("Ingrese 20 números para la ficha:")
+    for i in range(20):
+        while True:
+            try:
+                numero = int(input(f"Número {i + 1}: "))
+                ficha.append(numero)
+                break
+            except ValueError:
+                print("Por favor, ingrese un número entero válido.")
+    
+   
+    puntos = calcular_puntos(ficha)
+    if es_ficha_ganadora(puntos):
+        print("¡Es una ficha ganadora!")
+    else:
+        print("No es una ficha ganadora.")
 
-        if (contadorPositivos > 0) {
-            double mediaPositivos = (double) sumaPositivos / contadorPositivos;
-            System.out.println("La media de los valores positivos es: " + mediaPositivos);
-        } else {
-            System.out.println("No hay valores positivos.");
-        }
-
-        if (contadorNegativos > 0) {
-            double mediaNegativos = (double) sumaNegativos / contadorNegativos;
-            System.out.println("La media de los valores negativos es: " + mediaNegativos);
-        } else {
-            System.out.println("No hay valores negativos.");
-        }
-
-        scanner.close();
-    }
-}
+if __name__ == "__main__":
+    main()
