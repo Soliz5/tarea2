@@ -1,41 +1,28 @@
-import java.util.Scanner;
+def encontrar_siguientes_numeros(secuencia, cantidad):
+    
+    ultimo_numero = secuencia[-1]
+    
+    siguientes_numeros = []
 
-public class AlturaMedia {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        
-        int n;
-        do {
-            System.out.print("Introduce el número de personas (entero positivo): ");
-            n = scanner.nextInt();
-        } while (n <= 0); 
+   
+    incrementos = [5, 4]  
+    for i in range(cantidad):
+        incremento = incrementos[i % len(incrementos)]
+        ultimo_numero += incremento
+        siguientes_numeros.append(ultimo_numero)
 
-        double[] alturas = new double[n];
-        double sumaAlturas = 0;
+    return siguientes_numeros
 
-        for (int i = 0; i < n; i++) {
-            System.out.print("Introduce la altura de la persona " + (i + 1) + " (en metros): ");
-            alturas[i] = scanner.nextDouble();
-            sumaAlturas += alturas[i];
-        }
+def main():
+    
+    secuencia = [3, 8, 12, 16, 21]
+    cantidad_a_encontrar = 5
 
-        double alturaMedia = sumaAlturas / n;
-        System.out.println("La altura media es: " + alturaMedia + " metros");
+   
+    siguientes_numeros = encontrar_siguientes_numeros(secuencia, cantidad_a_encontrar)
 
-        int contadorSuperior = 0;
-        int contadorInferior = 0;
+    
+    print("Los siguientes 5 números en la secuencia son:", siguientes_numeros)
 
-        for (double altura : alturas) {
-            if (altura > alturaMedia) {
-                contadorSuperior++;
-            } else if (altura < alturaMedia) {
-                contadorInferior++;
-            }
-        }
-
-        System.out.println("Número de personas con altura superior a la media: " + contadorSuperior);
-        System.out.println("Número de personas con altura inferior a la media: " + contadorInferior);
-
-        scanner.close();
-    }
-}
+if __name__ == "__main__":
+    main()
