@@ -1,0 +1,55 @@
+def calcular_inversiones(prestamo):
+   
+    inversion_laptop = 0.50 * prestamo
+    inversion_muebles = 0.10 * prestamo
+    inversion_publicidad = 0.30 * prestamo
+    inversion_aplicaciones = 0.10 * prestamo
+
+    interes_laptop = 0.05 * inversion_laptop
+    interes_muebles = 0.07 * inversion_muebles
+    interes_publicidad = 0.10 * inversion_publicidad
+    interes_aplicaciones = 0.12 * inversion_aplicaciones
+
+    total_laptop = inversion_laptop + interes_laptop
+    total_muebles = inversion_muebles + interes_muebles
+    total_publicidad = inversion_publicidad + interes_publicidad
+    total_aplicaciones = inversion_aplicaciones + interes_aplicaciones
+
+    total_inversiones = total_laptop + total_muebles + total_publicidad + total_aplicaciones
+
+    sobrante = prestamo - total_inversiones
+
+    total_pagar = total_inversiones / (2 * 12)  
+
+    return (
+        inversion_laptop,
+        inversion_muebles,
+        inversion_publicidad,
+        inversion_aplicaciones,
+        total_pagar,
+        sobrante
+    )
+
+def main():
+    prestamo = 14000
+    (
+        inversion_laptop,
+        inversion_muebles,
+        inversion_publicidad,
+        inversion_aplicaciones,
+        total_pagar,
+        sobrante
+    ) = calcular_inversiones(prestamo)
+
+    print(f"Monto invertido en Laptop: {inversion_laptop:.2f} Bolivianos")
+    print(f"Monto invertido en Muebles: {inversion_muebles:.2f} Bolivianos")
+    print(f"Monto invertido en Publicidad: {inversion_publicidad:.2f} Bolivianos")
+    print(f"Monto invertido en Aplicaciones: {inversion_aplicaciones:.2f} Bolivianos")
+    print(f"\nCada mes, durante dos años debes pagar: {total_pagar:.2f} Bolivianos")
+
+    if sobrante > 0:
+        interes_sobrante = 0.15 * sobrante
+        print(f"Revisa tus inversiones, tienes {sobrante:.2f} Bolivianos con el interés más alto.")
+
+if __name__ == "__main__":
+    main()
