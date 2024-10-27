@@ -1,0 +1,58 @@
+def calcular_tarifa(peso):
+    if 0 <= peso <= 20:
+        return 3.5
+    elif 21 <= peso <= 50:
+        return 4.5
+    elif 51 <= peso <= 100:
+        return 5.8
+    elif 101 <= peso <= 200:
+        return 7.0
+    elif 201 <= peso <= 350:
+        return 8.0
+    elif 351 <= peso <= 500:
+        return 9.0
+    elif 501 <= peso <= 1000:
+        return 12.0
+    elif 1001 <= peso <= 2000:
+        return 17.0
+    elif 2001 <= peso <= 3000:
+        return 21.0
+    else:
+        return None  
+
+def main():
+    numero_paquetes = int(input("Ingrese el número de paquetes a enviar: "))
+    pesos = []
+
+    for i in range(numero_paquetes):
+        peso = float(input(f"Ingrese el peso del paquete {i + 1} en gramos: "))
+        pesos.append(peso)
+
+    tarifas = []
+    total_peso = 0
+
+    for peso in pesos:
+        tarifa = calcular_tarifa(peso)
+        if tarifa is None:
+            print(f"El paquete de {peso} gramos está fuera del rango y se clasifica como 'especial'.")
+        else:
+            total_peso += peso
+            tarifas.append(tarifa)
+    
+    costo_total_por_paquete = sum(tarifas)
+    print(f"\nCosto total si se envían paquetes por separado: {costo_total_por_paquete:.2f} Bs")
+    
+    tarifa_combined = calcular_tarifa(total_peso)
+    
+    if tarifa_combined is None:
+        print(f"El peso total de {total_peso} gramos está fuera del rango y se clasifica como 'especial'.")
+    else:
+        print(f"Costo total si se envían todos juntos: {tarifa_combined:.2f} Bs")
+
+    if costo_total_por_paquete < tarifa_combined:
+        print("Es más conveniente enviar los paquetes por separado.")
+    else:
+        print("Es más conveniente enviar todos los paquetes juntos.")
+
+if __name__ == "__main__":
+    main()
