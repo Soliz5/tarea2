@@ -1,0 +1,34 @@
+def calcular_fondos(viaticos_yenes):
+    
+    yenes_a_dolares = 142.55
+    dolares_a_bolivianos_oficial = 6.85
+
+   
+    dolares = viaticos_yenes / yenes_a_dolares
+
+   
+    bolivianos_oficial = dolares * dolares_a_bolivianos_oficial
+
+    
+    bolivianos_fuera_de_bancos = bolivianos_oficial * 1.5
+
+   
+    if dolares >= 1500:
+        mensaje = "No requieres más fondos."
+    else:
+        mensaje = "Debes conseguir más fondos."
+
+    return dolares, bolivianos_oficial, bolivianos_fuera_de_bancos, mensaje
+
+def main():
+    viaticos_yenes = 285100 
+    dolares, bolivianos_oficial, bolivianos_fuera_de_bancos, mensaje = calcular_fondos(viaticos_yenes)
+
+    # Mostrar resultados
+    print(f"Equivalente en dólares: {dolares:.2f} USD")
+    print(f"Equivalente en bolivianos (cambio oficial): {bolivianos_oficial:.2f} BOB")
+    print(f"Equivalente en bolivianos (cambio fuera de bancos): {bolivianos_fuera_de_bancos:.2f} BOB")
+    print(mensaje)
+
+if __name__ == "__main__":
+    main()
