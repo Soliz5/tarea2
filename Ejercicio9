@@ -1,0 +1,26 @@
+def calcular_bonificacion(salario_anual, puntos):
+    """Calcula la bonificación de un empleado según los puntos acumulados."""
+    if puntos < 50:
+        return 0
+    elif 50 <= puntos < 100:
+        return 0.05 * salario_anual
+    else:  
+        return 0.10 * salario_anual + 500
+
+def main():
+    
+    try:
+        salario_anual = float(input("Ingrese el salario anual del empleado (Bs): "))
+        puntos = int(input("Ingrese los puntos acumulados por el empleado: "))
+
+        
+        bonificacion = calcular_bonificacion(salario_anual, puntos)
+
+        # Mostrar el resultado
+        print(f"La bonificación del empleado es: {bonificacion:.2f} Bs")
+    
+    except ValueError:
+        print("Por favor, ingrese un número válido.")
+
+if __name__ == "__main__":
+    main()
