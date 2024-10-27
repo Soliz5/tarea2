@@ -1,44 +1,26 @@
-import java.util.Scanner;
+def es_numero_especial(numero):
+    
+    if numero <= 0:
+        return False
+    
+    if numero % 3 != 0:
+        return False
+    
+    if numero % 100 == 0 and numero % 300 != 0:
+        return False
+    return True
 
-public class MediaNumeros {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int[] numeros = new int[10];
-        int sumaPositivos = 0;
-        int sumaNegativos = 0;
-        int contadorPositivos = 0;
-        int contadorNegativos = 0;
+def main():
+    
+    try:
+        numero = int(input("Ingresa un número: "))
+        if es_numero_especial(numero):
+            print(f"El número {numero} es especial.")
+        else:
+            print(f"El número {numero} no es especial.")
+    except ValueError:
+        print("Por favor, ingresa un número entero válido.")
 
-        System.out.println("Introduce 10 números enteros:");
-        for (int i = 0; i < 10; i++) {
-            System.out.print("Número " + (i + 1) + ": ");
-            numeros[i] = scanner.nextInt();
-        }
+if __name__ == "__main__":
+    main()
 
-        for (int num : numeros) {
-            if (num > 0) {
-                sumaPositivos += num;
-                contadorPositivos++;
-            } else if (num < 0) {
-                sumaNegativos += num;
-                contadorNegativos++;
-            }
-        }
-
-        if (contadorPositivos > 0) {
-            double mediaPositivos = (double) sumaPositivos / contadorPositivos;
-            System.out.println("La media de los valores positivos es: " + mediaPositivos);
-        } else {
-            System.out.println("No hay valores positivos.");
-        }
-
-        if (contadorNegativos > 0) {
-            double mediaNegativos = (double) sumaNegativos / contadorNegativos;
-            System.out.println("La media de los valores negativos es: " + mediaNegativos);
-        } else {
-            System.out.println("No hay valores negativos.");
-        }
-
-        scanner.close();
-    }
-}
