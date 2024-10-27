@@ -1,0 +1,35 @@
+import random
+
+def clasificar_estudiantes(edades):
+    grupos = {
+        "Grupo 1": [],
+        "Grupo 2": [],
+        "Grupo 3": [],
+        "Grupo 4": []
+    }
+
+    for edad in edades:
+        if edad % 5 == 0 and edad % 2 != 0:
+            grupos["Grupo 1"].append(edad)
+        elif edad % 4 == 0:
+            grupos["Grupo 2"].append(edad)
+        elif edad % 3 == 0 and edad % 4 != 0 and edad % 5 != 0 and edad % 2 != 0:
+            grupos["Grupo 3"].append(edad)
+        else:
+            grupos["Grupo 4"].append(edad)
+
+    return grupos
+
+def main():
+   
+    edades = [random.randint(10, 17) for _ in range(1000)]
+
+    
+    grupos = clasificar_estudiantes(edades)
+
+    
+    for grupo, estudiantes in grupos.items():
+        print(f"{grupo} tiene {len(estudiantes)} estudiantes: {estudiantes}")
+
+if __name__ == "__main__":
+    main()
