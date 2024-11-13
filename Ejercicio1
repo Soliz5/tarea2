@@ -1,55 +1,61 @@
-def calcular_tarifa(peso):
-    if 0 <= peso <= 20:
-        return 3.5
-    elif 21 <= peso <= 50:
-        return 4.5
-    elif 51 <= peso <= 100:
-        return 5.8
-    elif 101 <= peso <= 200:
-        return 7.0
-    elif 201 <= peso <= 350:
-        return 8.0
-    elif 351 <= peso <= 500:
-        return 9.0
-    elif 501 <= peso <= 1000:
-        return 12.0
-    elif 1001 <= peso <= 2000:
-        return 17.0
-    elif 2001 <= peso <= 3000:
-        return 21.0
-    else:
-        return None  
-
 def main():
-    num_paquetes = int(input("Ingrese el número de paquetes a enviar: "))
-    pesos = []
-    costos_individuales = []
+    
+    tablas_largas = 26
+    tablas_cortas = 33
+    ganchos_pequenos = 200
+    ganchos_grandes = 20
+    tornillos = 510
 
-    for i in range(num_paquetes):
-        peso = float(input(f"Ingrese el peso del paquete {i + 1} en gramos: "))
-        pesos.append(peso)
-        tarifa = calcular_tarifa(peso)
-        
-        if tarifa is None:
-            print(f"El peso del paquete {i + 1} ({peso} gramos) está fuera del rango permitido.")
-            return  
-        else:
-            costos_individuales.append(tarifa)
+    req_tablas_largas = 4
+    req_tablas_cortas = 6
+    req_ganchos_pequenos = 12
+    req_ganchos_grandes = 2
+    req_tornillos = 14
 
-    costo_total_individual = sum(costos_individuales)
-    peso_total = sum(pesos)
-    tarifa_total = calcular_tarifa(peso_total)
+    num_estantes = 15
 
-    if tarifa_total is None:
-        print(f"El peso total de todos los paquetes ({peso_total} gramos) está fuera del rango permitido.")
+    total_tablas_largas = req_tablas_largas * num_estantes
+    total_tablas_cortas = req_tablas_cortas * num_estantes
+    total_ganchos_pequenos = req_ganchos_pequenos * num_estantes
+    total_ganchos_grandes = req_ganchos_grandes * num_estantes
+    total_tornillos = req_tornillos * num_estantes
+
+    if (tablas_largas >= total_tablas_largas and
+        tablas_cortas >= total_tablas_cortas and
+        ganchos_pequenos >= total_ganchos_pequenos and
+        ganchos_grandes >= total_ganchos_grandes and
+        tornillos >= total_tornillos):
+
+        sobrantes_largas = tablas_largas - total_tablas_largas
+        sobrantes_cortas = tablas_cortas - total_tablas_cortas
+        sobrantes_pequenos = ganchos_pequenos - total_ganchos_pequenos
+        sobrantes_grandes = ganchos_grandes - total_ganchos_grandes
+        sobrantes_tornillos = tornillos - total_tornillos
+
+        estantes_adicionales = min(
+            sobrantes_largas // req_tablas_largas,
+            sobrantes_cortas // req_tablas_cortas,
+            sobrantes_pequenos // req_ganchos_pequenos,
+            sobrantes_grandes // req_ganchos_grandes,
+            sobrantes_tornillos // req_tornillos
+        )
+
+        print("Es posible realizar los 15 estantes pedidos.")
+        print(f"Con el material sobrante puedes construir {estantes_adicionales} estantes adicionales.")
     else:
-        print(f"Costo total enviando paquetes individualmente: {costo_total_individual} Bs")
-        print(f"Costo total enviando todos los paquetes juntos: {tarifa_total} Bs")
+        
+        faltante_largas = max(0, total_tablas_largas - tablas_largas)
+        faltante_cortas = max(0, total_tablas_cortas - tablas_cortas)
+        faltante_pequenos = max(0, total_ganchos_pequenos - ganchos_pequenos)
+        faltante_grandes = max(0, total_ganchos_grandes - ganchos_grandes)
+        faltante_tornillos = max(0, total_tornillos - tornillos)
 
-        if costo_total_individual < tarifa_total:
-            print("Es más conveniente enviar los paquetes individualmente.")
-        else:
-            print("Es más conveniente enviar todos los paquetes juntos.")
+        print("No es posible cubrir el pedido porque faltan:")
+        print(f"{faltante_largas} tablas largas.")
+        print(f"{faltante_cortas} tablas cortas.")
+        print(f"{faltante_pequenos} ganchos pequeños.")
+        print(f"{faltante_grandes} ganchos grandes.")
+        print(f"{faltante_tornillos} tornillos.")
 
 if __name__ == "__main__":
     main()
